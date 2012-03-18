@@ -1,0 +1,10 @@
+tlk 0.1
+The LAN Kommunicator is a chatting software.
+
+In this release:
+-Auto peer discovery.
+-Name updation on the fly.
+
+TODO:
+-File transfer support.
+-Beautification.
