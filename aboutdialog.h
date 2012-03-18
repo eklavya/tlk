@@ -11,6 +11,7 @@ public:
     AboutDialog ( QWidget *parent = 0 );
     QLabel      *aboutLabel;
     QVBoxLayout *mainLayout;
+    void closeEvent ( QCloseEvent * e );
 };
 
 #endif

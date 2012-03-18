@@ -9,3 +9,8 @@ AboutDialog::AboutDialog( QWidget *parent ) : QDialog ( parent )
     this->show();
 }
 
+void AboutDialog::closeEvent ( QCloseEvent * e )
+{
+    this->~AboutDialog();
+}
+
