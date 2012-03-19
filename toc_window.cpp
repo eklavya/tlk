@@ -155,9 +155,19 @@ void TocWindow::palWindowClosed(QWidget *window)
     windowList.remove(windowList.key(window));
 }
 
-//refresh pal list, tell everyone to send their names
+//delete pal list, tell everyone to send their names
 void TocWindow::refreshList()
 {
+    QHashIterator<quint32, QWidget*> i(palList);
+    
+    //remove all pals from window, clear list
+    while (i.hasNext()) {
+        i.next();
+        mainLayout->removeWidget(i.value());
+        ((Pal*)i.value())->~Pal();
+    }
+    
+    palList.clear();
     sayHello(htonl(INADDR_BROADCAST), 1, TRUE);
 }
 
