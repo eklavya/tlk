@@ -24,7 +24,7 @@ TocWindow::TocWindow ( QWidget *parent ) : QDialog ( parent )
 	mainLayout    = new QVBoxLayout;
 	
 	recThread     = new RecThread       ( this );
-	nameEdit      = new QLineEdit       ( tr ( "Whats your name ?" ));
+	nameEdit      = new QLineEdit       ( tr ( "Default Name" ));
 	refreshButton = new QPushButton     ( tr ( "&Refresh" ));
 	fileMenu      = menuBar->addMenu    ( tr ( "&File" ));
 	helpMenu      = menuBar->addMenu    ( tr ( "&Help" ));
@@ -43,10 +43,15 @@ TocWindow::TocWindow ( QWidget *parent ) : QDialog ( parent )
 	
 	this->show();
 	
+	//start receiver thread
+	this->recThread->start();
+	
+	//let the receiver thread start
+	usleep(500);
+	
 	//Broadcast our presence on LAN.
 	sayHello ( htonl ( INADDR_BROADCAST ) , 1, FALSE);
 	
-	this->recThread->start();
 }
 
 //This function broadcasts our presence on LAN.
