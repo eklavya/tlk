@@ -50,7 +50,7 @@ TocWindow::TocWindow ( QWidget *parent ) : QDialog ( parent )
 	usleep(500);
 	
 	//Broadcast our presence on LAN.
-	sayHello ( htonl ( INADDR_BROADCAST ) , 1, FALSE);
+    sayHello ( htonl ( INADDR_BROADCAST ) , 1, 0);
 	
 }
 
@@ -88,7 +88,7 @@ void TocWindow::sayHello ( in_addr_t sayto, int broadcast_enabled, bool force_re
     //we are telling our name and we want receivers to respond back with theirs
     if ( force_reply ) my_name[0] = 0x03;
     //check if supplied name is within limits otherwise truncate it
-    strncpy ( my_name+1, nameEdit->text().toAscii(), ( nameEdit->text().length() < 199 ? nameEdit->text().length() : 199 ));
+    strncpy ( my_name+1, nameEdit->text().toLocal8Bit(), ( nameEdit->text().length() < 199 ? nameEdit->text().length() : 199 ));
     ::sendto(sockfd, my_name, 200, 0, (struct sockaddr*)&server, sizeof(server));
     delete my_name;
 }
@@ -104,7 +104,7 @@ void TocWindow::newMsgArrived(QString msg, quint32 from)
 	            Pal *pal = new Pal ( this, msg.mid(1) );
 	            this->mainLayout->addWidget(pal);
 	            palList.insert(from, pal);
-	            sayHello(from, 0, FALSE);
+                sayHello(from, 0, 0);
 	        }
 	        
 	        //update name
@@ -132,14 +132,14 @@ void TocWindow::newMsgArrived(QString msg, quint32 from)
 	        else {
 	            PalWindow *palWindow = new PalWindow(this, from);
 	            windowList.insert(from, palWindow);
-	            sayHello(from, 0, TRUE);
+                sayHello(from, 0, 1);
 	            palWindow->chatHistory->append(((Pal*)palList.value(from))->text() + " : " + msg.mid(1));
 	        }
 	    }
 	    
 	    ////Someone says hello, and wants us to respond back
 	    if ( msg[0] == 0x03 ) {
-	        sayHello(from, 0, FALSE);
+            sayHello(from, 0, 0);
 	    }
 	                                   
 	return;
@@ -173,7 +173,7 @@ void TocWindow::refreshList()
     }
     
     palList.clear();
-    sayHello(htonl(INADDR_BROADCAST), 1, TRUE);
+    sayHello(htonl(INADDR_BROADCAST), 1, 1);
 }
 
 void TocWindow::aboutTriggered()

@@ -30,7 +30,7 @@ PalWindow::PalWindow(QWidget *parent, in_addr_t ip) : QDialog(parent)
 	mainLayout->addLayout(lowerLayout);
 	this->setLayout(mainLayout);
 	
-	chatHistory->setReadOnly(TRUE);
+    chatHistory->setReadOnly(1);
 	
 	QObject::connect(sendButton, SIGNAL(clicked()), this, SLOT(msgSent()));
 	QObject::connect(msgOutbox, SIGNAL(returnPressed()), this, SLOT(msgSent()));
@@ -66,7 +66,7 @@ void PalWindow::msgSent()
 	
 	::memset(msg, 0, 200);
 	msg[0] = 0x02;
-	strncpy(msg+1, this->msgOutbox->text().toAscii(), this->msgOutbox->text().length());
+    strncpy(msg+1, this->msgOutbox->text().toLocal8Bit(), this->msgOutbox->text().length());
 	
 	::sendto(cli_sock, &msg, 200, 0, (struct sockaddr*)&server, sizeof(server));
 	::close(cli_sock);

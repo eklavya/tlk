@@ -1,7 +1,7 @@
 #ifndef PAL_H
 #define PAL_H
 
-#include <QLabel>
+#include <QtWidgets/QLabel>
 
 class Pal : public QLabel
 {

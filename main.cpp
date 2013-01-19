@@ -1,4 +1,4 @@
-#include <QApplication>
+#include <QtWidgets/QApplication>
 #include "toc_window.h"
 
 int main(int argc, char *argv[])

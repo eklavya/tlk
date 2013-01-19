@@ -16,7 +16,12 @@ extern "C" {
 }
 #endif
 
-#include <QtGui>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QPushButton>
 
 //Chat Window
 class PalWindow : public QDialog

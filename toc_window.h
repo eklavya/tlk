@@ -15,8 +15,9 @@ extern "C" {
 #endif
 
 #include <QHash>
-#include <QApplication>
-#include <QtGui>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QLineEdit>
 #include "rec_thread.h"
 #include "pal.h"
 #include "aboutdialog.h"

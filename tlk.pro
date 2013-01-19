@@ -7,6 +7,8 @@ TARGET = tlk
 DEPENDPATH += .
 INCLUDEPATH += .
 
+ QT += widgets
+
 # Input
 HEADERS += aboutdialog.h pal.h palwindow.h rec_thread.h toc_window.h
 SOURCES += aboutdialog.cpp \
