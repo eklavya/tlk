@@ -27,14 +27,14 @@ void RecThread::run()
 	}
 
 	for (;;) {
-		int incoming;
+        //int incoming;
 		socklen_t client_size = sizeof(client);
 		char msg[200];
 		memset(msg, 0, 200);
 		::recvfrom ( serv_sock, msg, 200, 0, (struct sockaddr*)&client, &client_size );
 		QString msg_string(msg);
 		emit newMsgArrived ( msg, client.sin_addr.s_addr );
-		::close(incoming);
+        //::close(incoming);
 	}
 	return;
 }

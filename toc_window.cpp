@@ -90,7 +90,7 @@ void TocWindow::sayHello ( in_addr_t sayto, int broadcast_enabled, bool force_re
     //check if supplied name is within limits otherwise truncate it
     strncpy ( my_name+1, nameEdit->text().toLocal8Bit(), ( nameEdit->text().length() < 199 ? nameEdit->text().length() : 199 ));
     ::sendto(sockfd, my_name, 200, 0, (struct sockaddr*)&server, sizeof(server));
-    delete my_name;
+    delete[] my_name;
 }
 
 //This function spwans a new pal window for chatting or updates already opened window with incoming msg
